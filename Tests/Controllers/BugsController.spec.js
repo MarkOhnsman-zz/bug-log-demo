@@ -11,8 +11,6 @@ app.use(controller.mount, controller.router)
 
 ava.before('Setup DB', async t => {
   await EstablishFakeDb()
-  await dbContext.Profile.create({ name: "Ted Testerson", email: "test@test.com" })
-  await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
   t.pass();
 });
 
@@ -30,4 +28,9 @@ ava("Can Get Bugs", async (t) => {
     console.error('[ERROR]', error)
     t.fail()
   }
+})
+
+ava("Can Post Bug", async (t) => {
+  let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
+  t.assert(bug.id)
 })
