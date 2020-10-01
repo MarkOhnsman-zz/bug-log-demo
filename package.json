@@ -8,7 +8,7 @@
     "start": "node index.js",
     "dev": "node index.js",
     "setup": "npm install",
-    "test": "ava TestConfig.js && ava --verbose --serial"
+    "test": "ava --verbose --serial"
   },
   "author": "Codeworks",
   "license": "ISC",
@@ -36,6 +36,6 @@
     "require": [
       "esm"
     ],
-    "files": []
+    "timeout": "1m"
   }
 }

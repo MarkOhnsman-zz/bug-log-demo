@@ -3,11 +3,11 @@ import { BadRequest } from "../utils/Errors";
 
 class BugsService {
   async findAll(query = {}) {
-    console.log('service')
     let bugs = await dbContext.Bugs.find(query).populate(
       "creator",
       "name picture"
     );
+    console.log("bugs:", bugs)
     return bugs;
   }
   async findById(id) {

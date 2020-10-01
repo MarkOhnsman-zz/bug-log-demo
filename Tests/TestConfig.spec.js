@@ -1,3 +1,3 @@
 require("dotenv").config();
 require = require("esm")(module);
-module.exports = require("./TestRunner");
+module.exports = require("./TestDbSetup.js");
