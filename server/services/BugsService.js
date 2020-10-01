@@ -3,7 +3,8 @@ import { BadRequest } from "../utils/Errors";
 
 class BugsService {
   async findAll(query = {}) {
-    console.log('service request for bugs')
+    console.log('service request for bugs', dbContext.Bugs.db)
+    dbContext.Bugs.db.config
     let bugs = await dbContext.Bugs.find(query).populate(
       "creator",
       "name picture"
