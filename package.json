@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "mock-mongoose": "^8.0.1-a",
-    "mongoose": "^5.8.0",
+    "mongoose": "^5.10.7",
     "socket.io": "^2.3.0"
   },
   "engines": {
