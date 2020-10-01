@@ -37,8 +37,9 @@ export class BugsController extends BaseController {
   }
   async create(req, res, next) {
     try {
-      req.body.creatorEmail = req.userInfo.email;
-      res.send(await bugsService.create(req.body))
+      // req.body.creatorEmail = req.userInfo.email;
+      let data = await bugsService.create(req.body)
+      res.send(data)
     } catch (error) {
       next(error);
     }
@@ -55,7 +56,7 @@ export class BugsController extends BaseController {
   async delete(req, res, next) {
     try {
       const query = {
-        creatorEmail: req.userInfo.email,
+        // creatorEmail: req.userInfo.email,
         _id: req.params.id
       }
       res.send(await bugsService.delete(query))

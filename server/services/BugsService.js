@@ -20,7 +20,7 @@ class BugsService {
     return await dbContext.Bugs.create(body);
   }
   async edit(body) {
-    let value = await dbContext.Bugs.findOneAndUpdate({ _id: body.id, creatorEmail: body.creatorEmail }, body, { runValidators: true, new: true })
+    let value = await dbContext.Bugs.findOneAndDelete({ _id: body.id, creatorEmail: body.creatorEmail }, body, { runValidators: true, new: true })
     if (!value) {
       throw new BadRequest("Invalid Id")
     }
