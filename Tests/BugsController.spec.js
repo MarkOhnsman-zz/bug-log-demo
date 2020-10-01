@@ -14,9 +14,7 @@ ava("Has Router Instance", (t) => {
 ava("Can Get Bugs", async (t) => {
   try {
     let server = supertest(app)
-    console.log('Getting bugs')
     let res = await server.get('/api/bugs')
-    console.log("response", res.body)
     t.pass(res.body)
   } catch (error) {
     console.error('[ERROR]', error)
@@ -24,11 +22,6 @@ ava("Can Get Bugs", async (t) => {
   }
 })
 
-
-  // it("Can Get Bugs", async () => {
-  //   let res = await supertest(controller.router).get("/api/bugs")
-  //   assert.isArray(res.body)
-  // })
 
   // it("Can add controllers manually", (done) => {
   //   let x = new Area({

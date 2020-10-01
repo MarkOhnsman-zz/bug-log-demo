@@ -36,8 +36,6 @@
     "require": [
       "esm"
     ],
-    "files": [
-      
-    ]
+    "files": []
   }
 }

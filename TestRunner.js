@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { MockMongoose } from 'mock-mongoose';
 import mongoose from 'mongoose';
-import DbConnection from '../server/db/DbConfig';
+import DbConnection from './server/db/DbConfig';
 var mockMongoose = new MockMongoose(mongoose);
 
 console.log("me first")
