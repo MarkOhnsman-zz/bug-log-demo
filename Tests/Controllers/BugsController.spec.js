@@ -1,7 +1,8 @@
-import ava from 'ava'
-import express from 'express'
-import supertest from 'supertest'
-import { BugsController } from '../../server/controllers/BugsController'
+import ava from 'ava';
+import express from 'express';
+import { BugsController } from '../../server/controllers/BugsController';
+import { bugsService } from '../../server/services/BugsService';
+
 
 let controller = new BugsController()
 const app = express()
@@ -13,10 +14,11 @@ ava.serial("Has Router Instance", (t) => {
 
 ava.serial("Can Get Bugs", async (t) => {
   try {
-    let server = supertest(app)
-    let res = await server.get('/api/bugs')
+    // let server = supertest(app)
+    // let res = await server.get('/api/bugs')
+    let res = await bugsService.findAll({})
     console.log("test Res:", res)
-    t.assert(Array.isArray(res.body))
+    t.assert(Array.isArray(res))
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail()

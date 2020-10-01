@@ -30,12 +30,13 @@
   },
   "devDependencies": {
     "ava": "^3.13.0",
+    "mongodb-memory-server": "^6.9.0",
     "supertest": "^5.0.0"
   },
   "ava": {
     "require": [
       "esm"
     ],
-    "timeout": "1m"
+    "timeout": "30s"
   }
 }

@@ -9,7 +9,4 @@ class DbContext {
   Profile = mongoose.model("Profile", ProfileSchema);
 }
 
-
-
-
 export const dbContext = new DbContext();

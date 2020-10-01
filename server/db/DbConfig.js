@@ -10,6 +10,13 @@ mongoose.connection.on("error", err => {
 mongoose.connection.on("connection", () => {
   console.log("DbConnection Successful");
 });
+mongoose.connection.on("close", () => {
+  console.log("closed")
+})
+mongoose.connection.on("disconnected", () => {
+  console.log("closed")
+})
+
 
 export default class DbConnection {
   static async connect(connectionstring = process.env.CONNECTION_STRING || "") {
