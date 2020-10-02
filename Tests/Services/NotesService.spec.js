@@ -52,6 +52,7 @@ ava("Can Edit Note", async (t) => {
   try {
     let note = await dbContext.Notes.create({ bug: _bug.id, body: "Here be notes", creatorEmail: "test@test.com" })
     let edited = await _sut.edit({ id: note._id, creatorEmail: "test@test.com", body: "Edited Note" })
+    // @ts-ignore
     t.is(edited.body, "Edited Note", `Expected body to be 'Edited Note' but got ${edited.body}`)
   } catch (error) {
     console.error('[ERROR]', error)
@@ -74,10 +75,12 @@ ava("Can Delete a Note", async (t) => {
 ava("Can't edit Note you do not own", async (t) => {
   try {
     let note = await dbContext.Notes.create({ bug: _bug.id, body: "Here be notes", creatorEmail: "test@test.com" })
+    // @ts-ignore
     note.creatorEmail = 'imposter'
-    await t.throwsAsync(async () => {
-      await _sut.edit(note)
-    }, { instanceOf: Error }, "Service should throw an error when attempting to edit a note that is not yours")
+    await t.throwsAsync(
+      _sut.edit(note),
+      { instanceOf: Error },
+      "Service should throw an error when attempting to edit a note that is not yours")
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error)
@@ -87,12 +90,12 @@ ava("Can't edit Note you do not own", async (t) => {
 ava("Can't delete Note you do not own", async (t) => {
   try {
     let note = await dbContext.Notes.create({ bug: _bug.id, body: "Here be notes", creatorEmail: "test@test.com" })
-    await t.throwsAsync(async () => {
-      await _sut.delete({ id: note._id, creatorEmail: "imposter" })
-    }, { instanceOf: Error }, "Service should throw an error when attempting to delete a note that is not yours")
+    await t.throwsAsync(
+      _sut.delete({ id: note._id, creatorEmail: "imposter" }),
+      { instanceOf: Error },
+      "Service should throw an error when attempting to delete a note that is not yours")
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error.message)
   }
 })
-

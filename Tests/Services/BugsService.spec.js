@@ -44,6 +44,7 @@ ava("findById Bugs Returns A Specific bug", async (t) => {
     if (typeof data !== 'object') {
       throw new Error("findById is not returning an object")
     }
+    // @ts-ignore
     t.is(bug.title, "Single Bug", "findById not returning the right bug")
   } catch (error) {
     console.error('[ERROR]', error)
@@ -65,6 +66,7 @@ ava("Can Edit Bug", async (t) => {
   try {
     let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
     let edited = await _sut.edit({ id: bug._id, creatorEmail: "test@test.com", title: "Edited Title" })
+    // @ts-ignore
     t.is(edited.title, "Edited Title", `Expected title to be 'Edited Title' but got ${edited.title}`)
   } catch (error) {
     console.error('[ERROR]', error)
@@ -79,6 +81,7 @@ ava("Deleting a bug changes status to 'closed'", async (t) => {
     if (!deleted) {
       throw new Error("Bug was not returned")
     }
+    // @ts-ignore
     t.true(deleted.closed, "The closed property should be set to true instead of deleting the data")
   } catch (error) {
     console.error('[ERROR]', error)
@@ -89,23 +92,26 @@ ava("Deleting a bug changes status to 'closed'", async (t) => {
 ava("Can't edit Deleted Bug", async (t) => {
   try {
     let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com", closed: true })
-    await t.throwsAsync(async () => {
-      await _sut.edit(bug)
-    }, { instanceOf: Error }, "Service should throw an error when attempting to edit a closed bug")
+    await t.throwsAsync(
+      _sut.edit(bug),
+      { instanceOf: Error },
+      "Service should throw an error when attempting to edit a closed bug")
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error)
   }
 })
 
-
 ava("Can't edit Bug you do not own", async (t) => {
   try {
     let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
+    // @ts-ignore
     bug.creatorEmail = 'imposter'
-    await t.throwsAsync(async () => {
-      await _sut.edit(bug)
-    }, { instanceOf: Error }, "Service should throw an error when attempting to edit a bug that is not yours")
+    await t.throwsAsync(
+      _sut.edit(bug),
+      { instanceOf: Error },
+      "Service should throw an error when attempting to edit a bug that is not yours"
+    )
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error)
@@ -115,9 +121,10 @@ ava("Can't edit Bug you do not own", async (t) => {
 ava("Can't delete Bug you do not own", async (t) => {
   try {
     let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
-    await t.throwsAsync(async () => {
-      await _sut.delete({ id: bug._id, creatorEmail: "imposter" })
-    }, { instanceOf: Error }, "Service should throw an error when attempting to delete a bug that is not yours")
+    await t.throwsAsync(
+      _sut.delete({ id: bug._id, creatorEmail: "imposter" }),
+      { instanceOf: Error },
+      "Service should throw an error when attempting to delete a bug that is not yours")
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error.message)

@@ -19,7 +19,6 @@ export class BugsController extends BaseController {
       let data = await bugsService.findAll(req.query)
       res.send(data)
     } catch (error) {
-      console.error(error)
       next(error);
     }
   }
