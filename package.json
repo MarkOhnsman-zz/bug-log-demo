@@ -45,7 +45,9 @@
   "nyc": {
     "exclude": [
       "**/db/DbConfig.js",
-      "**/Setup.js"
+      "**/Setup.js",
+      "**/utils",
+      "**/tests"
     ]
   }
 }

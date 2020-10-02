@@ -52,6 +52,16 @@ ava("findById Bugs Returns A Specific bug", async (t) => {
   }
 })
 
+ava("findById Bugs Throws an Error when Given a Bad Id", async (t) => {
+  try {
+    await t.throwsAsync(_sut.findById("5f4ec55a9d87ed001709822a"), { instanceOf: Error }, "Did not throw an error with a bad Id")
+    // @ts-ignore
+  } catch (error) {
+    console.error('[ERROR]', error)
+    t.fail(error.message)
+  }
+})
+
 ava("Can Create Bugs", async (t) => {
   try {
     const bug = await _sut.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })
