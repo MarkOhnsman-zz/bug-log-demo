@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { dbContext } from '../../server/db/DbContext';
 import { bugsService } from '../../server/services/BugsService';
-import { EstablishFakeDb } from '../_config/_MockDB';
+import { EstablishFakeDb } from '../_config/_mockDb';
 
 const _sut = bugsService;
 

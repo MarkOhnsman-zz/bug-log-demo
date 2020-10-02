@@ -2,9 +2,9 @@ import { MockAuth0Provider } from '@bcwdev/auth0provider';
 import ava from 'ava';
 import supertest from 'supertest';
 import { BugsController } from '../../server/controllers/BugsController';
-import { MockApp } from '../_config/_MockApp';
-import { EstablishFakeDb } from '../_config/_MockDB';
-import { USERS } from '../_config/_Users';
+import { MockApp } from '../_config/_mockApp';
+import { EstablishFakeDb } from '../_config/_mockDb';
+import { USERS } from '../_config/_users';
 
 const app = MockApp(new BugsController())
 const authMock = new MockAuth0Provider()

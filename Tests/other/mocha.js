@@ -1,5 +1,5 @@
 import ava from 'ava';
-import { EstablishFakeDb } from '../_config/_MockDB';
+import { EstablishFakeDb } from '../_config/_mockDb';
 
 let mockMongoose = null
 

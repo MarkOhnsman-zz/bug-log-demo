@@ -43,6 +43,9 @@
     "timeout": "10s"
   },
   "nyc": {
-    "exclude": "**/db/DbConfig.js"
+    "exclude": [
+      "**/db/DbConfig.js",
+      "**/Setup.js"
+    ]
   }
 }
