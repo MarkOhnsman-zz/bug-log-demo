@@ -7,6 +7,7 @@ import { dbContext } from '../../server/db/DbContext';
 export async function EstablishFakeDb() {
   try {
     const mockMongoose = new MockMongoose(mongoose);
+    mockMongoose.helper.setDbVersion("3.2.1")
     await mockMongoose.prepareStorage()
     await DbConnection.connect('mongodb://test/db');
     await dbContext.Profile.create({ name: "Ted Testerson", email: "test@test.com" })
