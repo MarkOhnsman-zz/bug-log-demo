@@ -1,4 +1,4 @@
-import auth0Provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { notesService } from "../services/NotesService";
 import BaseController from "../utils/BaseController";
 
@@ -6,7 +6,7 @@ export class NotesController extends BaseController {
   constructor() {
     super("api/notes");
     this.router
-      .use(auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post("", this.create)
       .put("/:id", this.edit)
       .delete('/:id', this.delete)

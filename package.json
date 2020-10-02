@@ -8,19 +8,18 @@
     "start": "node index.js",
     "dev": "node index.js",
     "setup": "npm install",
-    "test": "ava --verbose --serial"
+    "test": "ava --verbose --serial",
+    "test:build": "ava --verbose"
   },
   "author": "Codeworks",
   "license": "ISC",
   "dependencies": {
-    "@bcwdev/auth0provider": "^0.0.6",
-    "@vue/cli": "^4.5.6",
+    "@bcwdev/auth0provider": "^0.0.20",
     "cors": "^2.8.1",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
-    "mock-mongoose": "^8.0.1-a",
     "mongoose": "^5.10.7",
     "socket.io": "^2.3.0"
   },
@@ -30,13 +29,13 @@
   },
   "devDependencies": {
     "ava": "^3.13.0",
-    "mongodb-memory-server": "^6.9.0",
-    "supertest": "^5.0.0"
+    "supertest": "^5.0.0",
+    "mock-mongoose": "^8.0.1-a"
   },
   "ava": {
     "require": [
       "esm"
     ],
-    "timeout": "30s"
+    "timeout": "10s"
   }
 }

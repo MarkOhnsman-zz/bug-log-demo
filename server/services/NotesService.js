@@ -3,11 +3,11 @@ import { BadRequest } from "../utils/Errors";
 
 class NotesService {
   async findAll(query = {}) {
-    let bugs = await dbContext.Bugs.find(query).populate(
+    let notes = await dbContext.Bugs.find(query).populate(
       "creator",
       "name picture"
     );
-    return bugs;
+    return notes;
   }
   async create(body) {
     return await dbContext.Notes.create(body);

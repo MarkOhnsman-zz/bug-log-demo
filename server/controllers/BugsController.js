@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { bugsService } from "../services/BugsService";
 import BaseController from "../utils/BaseController";
 
@@ -5,7 +6,7 @@ export class BugsController extends BaseController {
   constructor() {
     super("api/bugs");
     this.router
-      // .use(auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/comments", this.getCommentsByBugId)
@@ -18,6 +19,7 @@ export class BugsController extends BaseController {
       let data = await bugsService.findAll(req.query)
       res.send(data)
     } catch (error) {
+      console.error(error)
       next(error);
     }
   }
@@ -37,9 +39,8 @@ export class BugsController extends BaseController {
   }
   async create(req, res, next) {
     try {
-      // req.body.creatorEmail = req.userInfo.email;
-      let data = await bugsService.create(req.body)
-      res.send(data)
+      req.body.creatorEmail = req.userInfo.email;
+      res.send(await bugsService.create(req.body))
     } catch (error) {
       next(error);
     }
@@ -56,7 +57,7 @@ export class BugsController extends BaseController {
   async delete(req, res, next) {
     try {
       const query = {
-        // creatorEmail: req.userInfo.email,
+        creatorEmail: req.userInfo.email,
         _id: req.params.id
       }
       res.send(await bugsService.delete(query))
