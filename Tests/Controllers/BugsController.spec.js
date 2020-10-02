@@ -30,8 +30,6 @@ ava.serial("Must be logged in to Get Bugs", async (t) => {
   }
 })
 
-
-//Some comment somewhere
 ava.serial("Logged in user Can Get Bugs", async (t) => {
   try {
     authMock.setMockUserInfo(USERS.standard)
