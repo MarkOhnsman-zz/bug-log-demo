@@ -40,7 +40,7 @@
     "require": [
       "esm"
     ],
-    "timeout": "3m"
+    "timeout": "100s"
   },
   "nyc": {
     "exclude": [
