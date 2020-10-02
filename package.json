@@ -8,7 +8,7 @@
     "start": "node index.js",
     "dev": "node index.js",
     "setup": "npm install",
-    "test": "ava --verbose --serial --fail-fast",
+    "test": "ava --verbose --serial --fail-fast --inspect=0.0.0.0:9229",
     "test:build": "ava --verbose",
     "test:html": "nyc --reporter=html --reporter=text ava --verbose --serial"
   },
