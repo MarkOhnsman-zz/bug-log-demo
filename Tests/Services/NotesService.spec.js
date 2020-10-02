@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { dbContext } from '../../server/db/DbContext';
 import { notesService } from '../../server/services/NotesService';
-import { EstablishFakeDb } from '../../TestDB';
+import { EstablishFakeDb } from '../_config/_MockDB';
 
 const _sut = notesService;
 let _bug = {}
@@ -17,7 +17,7 @@ ava.before('Setup DB', async t => {
   }
 });
 
-ava("NoteService Functionality Adheres to Testing Requirements", (t) => {
+ava.serial("NoteService Functionality Adheres to Testing Requirements", (t) => {
   t.is(typeof _sut.findAll, "function", "findAll must be a function")
   t.is(typeof _sut.create, "function", "create must be a function")
   t.is(typeof _sut.edit, "function", "edit must be a function")

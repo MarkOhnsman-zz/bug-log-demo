@@ -1,27 +1,11 @@
 import { MockAuth0Provider } from '@bcwdev/auth0provider';
 import ava from 'ava';
-import bp from 'body-parser';
-// import { MockApp } from '../../ControllerUnderTest';
-import express from 'express';
 import supertest from 'supertest';
 import { BugsController } from '../../server/controllers/BugsController';
-import { EstablishFakeDb } from '../../TestDB';
+import { MockApp } from '../_config/_MockApp';
+import { EstablishFakeDb } from '../_config/_MockDB';
 
-// const _sut = MockApp(new BugsController())
-let app = express()
-const _sut = new BugsController()
-app.use(bp.json())
-app.use(_sut.mount, _sut.router)
-app.use("*", (req, res, next) => {
-  res.send("Default fail")
-})
-app.use((err, req, res, next) => {
-  res.status(err.status || 400).send(err.message)
-})
-
-
-
-
+const app = MockApp(new BugsController())
 const authMock = new MockAuth0Provider()
 const _users = {
   standard: { email: "test@test.com", sub: "1234345", permissions: [], roles: [] },
@@ -56,6 +40,18 @@ ava.serial("Logged in user Can Get Bugs", async (t) => {
     authMock.setMockUserInfo(_users.standard)
     let res = await request.get('/api/bugs')
     t.is(res.statusType, 2, `Server responded with ${res.status}: ${res.error} instead of 200: Ok`)
+  } catch (error) {
+    console.error('[ERROR]', error)
+    t.fail(error.message)
+  }
+})
+
+ava.serial("Logged OUt", async (t) => {
+  try {
+    let request = supertest(app)
+    authMock.setMockUserInfo(null)
+    let res = await request.get('/api/bugs')
+    t.is(res.statusType, 4, `Server responded with ${res.status}: ${res.error} instead of 200: Ok`)
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error.message)

@@ -8,13 +8,13 @@
     "start": "node index.js",
     "dev": "node index.js",
     "setup": "npm install",
-    "test": "ava --verbose --serial",
+    "test": "ava --verbose --serial --fail-fast",
     "test:build": "ava --verbose"
   },
   "author": "Codeworks",
   "license": "ISC",
   "dependencies": {
-    "@bcwdev/auth0provider": "^0.0.20",
+    "@bcwdev/auth0provider": "^1.0.0",
     "cors": "^2.8.1",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",

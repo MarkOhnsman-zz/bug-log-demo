@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { dbContext } from '../../server/db/DbContext';
 import { bugsService } from '../../server/services/BugsService';
-import { EstablishFakeDb } from '../../TestDB';
+import { EstablishFakeDb } from '../_config/_MockDB';
 
 const _sut = bugsService;
 
@@ -15,7 +15,7 @@ ava.before('Setup DB', async t => {
   }
 });
 
-ava("BugService Functionality Adheres to Testing Requirements", (t) => {
+ava.serial("BugService Functionality Adheres to Testing Requirements", (t) => {
   t.is(typeof _sut.findAll, "function", "findAll must be a function")
   t.is(typeof _sut.findById, "function", "findById must be a function")
   t.is(typeof _sut.create, "function", "create must be a function")

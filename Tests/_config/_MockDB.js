@@ -1,7 +1,7 @@
 import { MockMongoose } from 'mock-mongoose';
 import mongoose from "mongoose";
-import DbConnection from './server/db/DbConfig';
-import { dbContext } from './server/db/DbContext';
+import DbConnection from '../../server/db/DbConfig';
+import { dbContext } from '../../server/db/DbContext';
 
 const mockMongoose = new MockMongoose(mongoose);
 
