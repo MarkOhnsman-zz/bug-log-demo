@@ -9,8 +9,8 @@
     "dev": "node index.js",
     "setup": "npm install",
     "pretest": "node ./__tests__/_config/_mockDbSetup",
-    "test": "npx ava --verbose --serial --timeout=2m",
-    "test:build": "npx ava --verbose --fail-fast --inspect=0.0.0.0:9229",
+    "test": "ava --config ava.config.js",
+    "test:build": "ava --verbose --fail-fast --inspect=0.0.0.0:9229",
     "test:html": "nyc --reporter=html --reporter=text ava --verbose --serial"
   },
   "author": "Codeworks",
@@ -36,11 +36,6 @@
     "mock-mongoose": "^8.0.1-a",
     "nyc": "^15.1.0",
     "supertest": "^5.0.0"
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ]
   },
   "nyc": {
     "exclude": [
