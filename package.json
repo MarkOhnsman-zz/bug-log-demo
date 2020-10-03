@@ -9,7 +9,7 @@
     "dev": "node index.js",
     "setup": "npm install",
     "pretest": "node ./__tests__/_config/_mockDbSetup",
-    "test": "npm run pretest && ava --verbose --serial --fail-fast --inspect=0.0.0.0:9229",
+    "test": "npm run pretest && ava --verbose --serial --fail-fast --timeout=2m",
     "test:build": "ava --verbose",
     "test:html": "nyc --reporter=html --reporter=text ava --verbose --serial"
   },
@@ -40,8 +40,7 @@
   "ava": {
     "require": [
       "esm"
-    ],
-    "timeout": "100s"
+    ]
   },
   "nyc": {
     "exclude": [
