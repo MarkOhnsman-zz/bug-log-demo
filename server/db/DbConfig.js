@@ -23,7 +23,7 @@ export default class DbConnection {
     let status = 0;
     try {
       let status = await mongoose.connect(connectionstring);
-      console.log("[CONNECTION TO DB SUCCESSFUL]");
+      console.log("\x1b[36m%s\x1b[0m", `[CONNECTION TO DB ${mongoose.connection.name}]`);
       return status;
     } catch (e) {
       console.error(

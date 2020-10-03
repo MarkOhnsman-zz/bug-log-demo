@@ -8,7 +8,7 @@ export async function EstablishFakeDb() {
   try {
     console.log("Connecting to DB")
     let i = setInterval(() => {
-      console.log('connecting....')
+      console.log('\x1b[31m','connecting....')
     }, 300)
     await mockMongoose.prepareStorage()
     await DbConnection.connect('mongodb://test/db');

@@ -8,11 +8,12 @@ async function start() {
   mongoose.set("useFindAndModify", false);
   mongoose.set("useCreateIndex", true);
   mongoose.set("useUnifiedTopology", true);
-  
+
   console.log("Initializing Database");
-  await mockMongoose.prepareStorage()
+  await mockMongoose.prepareStorage();
   await mongoose.connect('mongodb://test/db');
-  console.log("db ready");
+  console.log("\x1b[36m%s\x1b[0m", "[CONNECTION ESTABLISHED]");
+  await mongoose.disconnect();
   process.exit()
 }
 
