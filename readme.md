@@ -1,1 +1,0 @@
-[![Coverage Status](https://coveralls.io/repos/github/MarkOhnsman/bug-log-demo/badge.svg?branch=dev)](https://coveralls.io/github/MarkOhnsman/bug-log-demo?branch=dev)
