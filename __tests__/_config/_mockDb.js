@@ -7,7 +7,7 @@ async function buildStorage() {
   if (done) { return console.log("[STORAGE READY]") }
   const mockMongoose = new MockMongoose(mongoose);
   await mockMongoose.prepareStorage()
-  await DbConnection.connect('mongodb://test/db');
+  await DbConnection.connect(`mongodb://test/db-${~~(Math.random() * 5000)}`);
   done = true
 }
 
