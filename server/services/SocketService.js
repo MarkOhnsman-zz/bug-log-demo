@@ -1,5 +1,5 @@
 import SocketIO from "socket.io";
-import auth0Provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 class SocketService {
   io = SocketIO();
   /**
@@ -20,7 +20,7 @@ class SocketService {
    */
   async Authenticate(socket, bearerToken) {
     try {
-      let user = await auth0Provider.getUserInfoFromBearerToken(bearerToken);
+      let user = await Auth0Provider.getUserInfoFromBearerToken(bearerToken);
       socket["user"] = user;
       socket.join(user.id);
       socket.emit("AUTHENTICATED");
@@ -54,7 +54,7 @@ class SocketService {
   messageUser(userId, eventName, payload) {
     try {
       this.io.to(userId).emit(eventName, payload);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   messageRoom(room, eventName, payload) {
@@ -79,7 +79,7 @@ class SocketService {
           return;
         }
         this.io.emit("UserDisconnected", socket.user.id);
-      } catch (e) {}
+      } catch (e) { }
     };
   }
 
@@ -91,7 +91,7 @@ class SocketService {
           return socket.emit("error", "Unknown Action");
         }
         action.call(this, socket, payload.data);
-      } catch (e) {}
+      } catch (e) { }
     };
   }
 
