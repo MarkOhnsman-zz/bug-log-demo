@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { dbContext } from '../../server/db/DbContext';
 import { notesService } from '../../server/services/NotesService';
-import { EstablishFakeDb } from '../_config/_mockDb';
+import { EstablishFakeDb, Teardown } from '../_config/_mockDb';
 
 const _sut = notesService;
 let _bug = {}
@@ -98,4 +98,9 @@ ava("Can't delete Note you do not own", async (t) => {
     console.error('[ERROR]', error)
     t.fail(error.message)
   }
+})
+
+ava.after("Teardown", async t => {
+  await Teardown()
+  t.pass("BugsController Completed")
 })

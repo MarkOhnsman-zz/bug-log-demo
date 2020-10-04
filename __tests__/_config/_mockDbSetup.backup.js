@@ -13,7 +13,7 @@ async function start() {
     console.log("Initializing Database");
     await mockMongoose.prepareStorage();
     await mongoose.connect('mongodb://test/db');
-    console.log("\x1b[36m%s\x1b[0m", "[CONNECTION ESTABLISHED]");
+    console.log("\x1b[31m", "[CONNECTION ESTABLISHED]");
     await mongoose.disconnect();
     process.exit()
   } catch (e) {

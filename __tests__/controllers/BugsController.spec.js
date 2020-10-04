@@ -3,7 +3,7 @@ import ava from 'ava';
 import supertest from 'supertest';
 import { BugsController } from '../../server/controllers/BugsController';
 import { MockApp } from '../_config/_mockApp';
-import { EstablishFakeDb } from '../_config/_mockDb';
+import { EstablishFakeDb, Teardown } from '../_config/_mockDb';
 import { USERS } from '../_config/_users';
 
 const app = MockApp(new BugsController())
@@ -42,3 +42,7 @@ ava.serial("Logged in user Can Get Bugs", async (t) => {
 })
 
 
+ava.after("Teardown", async t => {
+  await Teardown()
+  t.pass("BugsController Completed")
+})

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { COLORS } from "../../__tests__/_config/_ConsoleColors";
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -14,7 +15,7 @@ mongoose.connection.on("close", () => {
   console.log("closed")
 })
 mongoose.connection.on("disconnected", () => {
-  console.log("closed")
+  console.log("disconnected")
 })
 
 
@@ -23,14 +24,26 @@ export default class DbConnection {
     let status = 0;
     try {
       let status = await mongoose.connect(connectionstring);
-      console.log("\x1b[36m%s\x1b[0m", `[CONNECTION TO DB ${mongoose.connection.name}]`);
+      console.log(COLORS.Cyan, `[CONNECTION TO DB ${mongoose.connection.name}]`);
       return status;
     } catch (e) {
       console.error(
         "[MONGOOSE CONNECTION ERROR]:",
-        "Invalid connection string"
+        "Invalid connection string",
+        e
       );
       return status;
+    }
+  }
+  static async disconnect() {
+    try {
+      await mongoose.disconnect()
+      console.log(COLORS.Red, `[DISCONNECTED FROM DB]`);
+    } catch (e) {
+      console.error(
+        "[MONGOOSE CONNECTION ERROR]:",
+        e
+      );
     }
   }
 }

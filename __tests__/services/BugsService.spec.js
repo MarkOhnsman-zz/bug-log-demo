@@ -1,7 +1,7 @@
 import ava from 'ava';
 import { dbContext } from '../../server/db/DbContext';
 import { bugsService } from '../../server/services/BugsService';
-import { EstablishFakeDb } from '../_config/_mockDb';
+import { EstablishFakeDb, Teardown } from '../_config/_mockDb';
 
 const _sut = bugsService;
 
@@ -141,3 +141,7 @@ ava("Can't delete Bug you do not own", async (t) => {
   }
 })
 
+ava.after("Teardown", async t => {
+  await Teardown()
+  t.pass("BugsController Completed")
+})

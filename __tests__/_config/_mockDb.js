@@ -1,25 +1,31 @@
 import DbConnection from '../../server/db/DbConfig';
+import { COLORS } from './_ConsoleColors';
 import MockMongo from './_MockMongo';
 
+const mongo = new MockMongo()
 async function buildStorage() {
-  const mongo = new MockMongo()
   const connectionstring = await mongo.start()
   await DbConnection.connect(connectionstring);
-  console.log("\x1b[36m%s\x1b[0m", "[CONNECTION ESTABLISHED]");
+  console.log(COLORS.Cyan, "[CONNECTION ESTABLISHED]");
 }
 
 export async function EstablishFakeDb() {
-  console.log("Connecting to DB")
+  console.log(COLORS.Green, "Connecting to DB")
   let i = setInterval(() => {
-    console.log('\x1b[31m', '  connecting....')
+    console.log(COLORS.Red, '  connecting....')
   }, 300)
   try {
     await buildStorage()
   } catch (e) {
-    console.error('\x1b[31m', '[CONNECTION ERROR]', e)
+    console.error(COLORS.Red, '[CONNECTION ERROR]', e)
   } finally {
     clearInterval(i)
   }
+}
+
+export async function Teardown() {
+  await DbConnection.disconnect()
+  await mongo.stop()
 }
 
 
