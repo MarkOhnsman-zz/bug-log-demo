@@ -1,6 +1,7 @@
 const { MockMongoose } = require("mock-mongoose");
-const mongoose = require('mongoose');
-const MockMongo = require("./_MockMongo");
+const mongoose = require('mongoose')
+const mockMongoose = new MockMongoose(mongoose);
+
 
 async function start() {
   try {
@@ -10,14 +11,10 @@ async function start() {
     mongoose.set("useUnifiedTopology", true);
 
     console.log("Initializing Database");
-    const mongo = new MockMongo()
-    const connectionstring = await mongo.start()
-    process.env.CONNECTION_STRING = connectionstring
-    await mongoose.connect(connectionstring);
+    await mockMongoose.prepareStorage();
+    await mongoose.connect('mongodb://test/db');
     console.log("\x1b[36m%s\x1b[0m", "[CONNECTION ESTABLISHED]");
     await mongoose.disconnect();
-    await mongo.stop()
-    console.log("\x1b[31m", "[TESTS SUITE READY]");
     process.exit()
   } catch (e) {
     console.error(e)

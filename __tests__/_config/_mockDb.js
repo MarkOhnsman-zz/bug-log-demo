@@ -1,14 +1,11 @@
-import { MockMongoose } from 'mock-mongoose';
-import mongoose from "mongoose";
 import DbConnection from '../../server/db/DbConfig';
+import MockMongo from './_MockMongo';
 
-let done = false
 async function buildStorage() {
-  if (done) { return console.log("[STORAGE READY]") }
-  const mockMongoose = new MockMongoose(mongoose);
-  await mockMongoose.prepareStorage()
-  await DbConnection.connect(`mongodb://127.0.0.1:27017/test`);
-  done = true
+  const mongo = new MockMongo()
+  const connectionstring = await mongo.start()
+  await DbConnection.connect(connectionstring);
+  console.log("\x1b[36m%s\x1b[0m", "[CONNECTION ESTABLISHED]");
 }
 
 export async function EstablishFakeDb() {
