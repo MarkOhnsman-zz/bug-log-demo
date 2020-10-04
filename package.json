@@ -8,7 +8,6 @@
     "start": "node index.js",
     "dev": "node index.js",
     "setup": "npm install",
-    "pretest": "node ./__tests__/_config/_mockDbSetup",
     "test": "ava --verbose --serial --fail-fast --inspect=0.0.0.0:9229",
     "test:html": "nyc --reporter=html --reporter=text ava --verbose --serial"
   },
@@ -32,8 +31,7 @@
     "ava": "^3.13.0",
     "chai": "^4.2.0",
     "mocha": "^8.1.3",
-    "mock-mongoose": "^8.0.1-a",
-    "mongo-in-memory": "0.0.5",
+    "mockable-mongo": "0.0.3",
     "nyc": "^15.1.0",
     "supertest": "^5.0.0"
   },

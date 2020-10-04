@@ -1,6 +1,7 @@
+import MockMongo from 'mockable-mongo';
 import DbConnection from '../../server/db/DbConfig';
 import { COLORS } from './_ConsoleColors';
-import MockMongo from './_MockMongo';
+
 
 const mongo = new MockMongo()
 async function buildStorage() {
