@@ -7,20 +7,21 @@ async function buildStorage() {
   if (done) { return console.log("[STORAGE READY]") }
   const mockMongoose = new MockMongoose(mongoose);
   await mockMongoose.prepareStorage()
-  await DbConnection.connect(`mongodb://test/db-${~~(Math.random() * 5000)}`);
+  await DbConnection.connect(`mongodb://127.0.0.1:27017/test`);
   done = true
 }
 
 export async function EstablishFakeDb() {
+  console.log("Connecting to DB")
+  let i = setInterval(() => {
+    console.log('\x1b[31m', '  connecting....')
+  }, 300)
   try {
-    console.log("Connecting to DB")
-    let i = setInterval(() => {
-      console.log('\x1b[31m', '  connecting....')
-    }, 300)
     await buildStorage()
-    clearInterval(i)
   } catch (e) {
-    console.error(e)
+    console.error('\x1b[31m', '[CONNECTION ERROR]', e)
+  } finally {
+    clearInterval(i)
   }
 }
 
