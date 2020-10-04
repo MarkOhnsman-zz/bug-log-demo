@@ -41,6 +41,17 @@ ava.serial("Logged in user Can Get Bugs", async (t) => {
   }
 })
 
+ava.serial("Logged in user Can Create a Bug", async (t) => {
+  try {
+    authMock.setMockUserInfo(USERS.standard)
+    let res = await request.post('/api/bugs').send({ title: "Bugs", description: "Here be bugs" })
+    t.is(res.body.creatorEmail, USERS.standard.email, `Server attaches correct user email to bug`)
+  } catch (error) {
+    console.error('[ERROR]', error)
+    t.fail(error.message)
+  }
+})
+
 
 ava.after("Teardown", async t => {
   await Teardown()
