@@ -2,6 +2,7 @@ import { MockAuth0Provider } from '@bcwdev/auth0provider';
 import ava from 'ava';
 import supertest from 'supertest';
 import { BugsController } from '../../server/controllers/BugsController';
+import { dbContext } from '../../server/db/DbContext';
 import { MockApp } from '../_config/_mockApp';
 import { EstablishFakeDb, Teardown } from '../_config/_mockDb';
 import { USERS } from '../_config/_users';
@@ -52,6 +53,17 @@ ava.serial("Logged in user Can Create a Bug", async (t) => {
   }
 })
 
+ava.serial("Logged in user Can Edit a Bug", async (t) => {
+  try {
+    let bug = await dbContext.Bugs.create({ title: "Bug", description: "editing", creatorEmail: USERS.standard.email })
+    authMock.setMockUserInfo(USERS.standard)
+    let res = await request.put('/api/bugs/' + bug.id).send({ title: "Edit" })
+    t.is(res.body.title, "Edit", `Server edits correct bug`)
+  } catch (error) {
+    console.error('[ERROR]', error)
+    t.fail(error.message)
+  }
+})
 
 ava.after("Teardown", async t => {
   await Teardown()
