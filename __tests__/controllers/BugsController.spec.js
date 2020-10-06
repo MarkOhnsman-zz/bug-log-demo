@@ -7,9 +7,9 @@ import { MockApp } from '../_config/_mockApp';
 import { EstablishFakeDb, Teardown } from '../_config/_mockDb';
 import { USERS } from '../_config/_users';
 
-const app = MockApp(new BugsController())
+const _sut = MockApp(new BugsController())
 const authMock = new MockAuth0Provider()
-const request = supertest(app)
+const request = supertest(_sut)
 
 ava.before('Setup DB', async t => {
   try {
@@ -46,7 +46,7 @@ ava.serial("Logged in user Can Create a Bug", async (t) => {
   try {
     authMock.setMockUserInfo(USERS.standard)
     let res = await request.post('/api/bugs').send({ title: "Bugs", description: "Here be bugs" })
-    t.is(res.body.creatorEmail, USERS.standard.email, `Server attaches correct user email to bug`)
+    t.is(res.body.creatorEmail, USERS.standard.email, `Email set to ${res.body.creatorEmail} instead of  ${USERS.standard.email}`)
   } catch (error) {
     console.error('[ERROR]', error)
     t.fail(error.message)
