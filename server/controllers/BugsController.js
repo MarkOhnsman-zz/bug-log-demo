@@ -1,7 +1,6 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { bugsService } from "../services/BugsService";
 import BaseController from "../utils/BaseController";
-import { BadRequest } from "../utils/Errors";
 
 export class BugsController extends BaseController {
   constructor() {
@@ -17,9 +16,8 @@ export class BugsController extends BaseController {
   }
   async getAll(req, res, next) {
     try {
-      throw new BadRequest()
-      // let data = await bugsService.findAll(req.query)
-      // res.send(data)
+      let data = await bugsService.findAll(req.query)
+      res.send(data)
     } catch (error) {
       next(error);
     }
