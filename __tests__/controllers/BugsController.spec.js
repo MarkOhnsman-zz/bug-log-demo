@@ -66,6 +66,15 @@ ava.serial("Logged in user Can Edit a Bug", async (t) => {
 })
 
 ava.after("Teardown", async t => {
+  await delay()
   await Teardown()
   t.pass("BugsController Completed")
 })
+
+async function delay() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 1000)
+  })
+}
