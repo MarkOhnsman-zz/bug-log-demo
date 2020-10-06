@@ -2,8 +2,6 @@ import ava from 'ava'
 import express from 'express'
 import Startup from '../server/Startup'
 
-
-
 ava("application startup", (t) => {
   try {
     let server = express()

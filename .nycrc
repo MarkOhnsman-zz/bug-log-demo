@@ -1,0 +1,24 @@
+{
+    "reporter": [
+        "html",
+        "text",
+        "text-summary"
+    ],
+    "include": [
+        "server/**"
+    ],
+    "exclude": [
+        "**/db/DbConfig.js",
+        "**/Setup.js",
+        "**/utils",
+        "**/tests"
+    ],
+    "require": [
+        "esm"
+    ],
+    "check-coverage": true,
+    "cache": true,
+    "lines": 96,
+    "branches": "82",
+    "statements": "96"
+}
