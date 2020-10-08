@@ -84,6 +84,7 @@ ava("Can Edit Bug", async (t) => {
   }
 })
 
+
 ava("Deleting a bug changes status to 'closed'", async (t) => {
   try {
     let bug = await dbContext.Bugs.create({ title: "Bugs", description: "Here be bugs", creatorEmail: "test@test.com" })

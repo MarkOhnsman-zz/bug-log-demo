@@ -65,6 +65,20 @@ ava.serial("Logged in user Can Edit a Bug", async (t) => {
   }
 })
 
+
+
+ava.serial("Logged in user Can Delete a Bug", async (t) => {
+  try {
+    let bug = await dbContext.Bugs.create({ title: "Bug", description: "editing", creatorEmail: USERS.standard.email })
+    authMock.setMockUserInfo(USERS.standard)
+    let res = await request.delete('/api/bugs/' + bug.id)
+    t.true(res.body.closed, `Bug returned does not reflect closed`)
+  } catch (error) {
+    console.error('[ERROR]', error)
+    t.fail(error.message)
+  }
+})
+
 ava.after("Teardown", async t => {
   await delay()
   await Teardown()
